@@ -97,23 +97,41 @@ def plot_ast(ast_info):
     nodes = [(0, 1), (0, 2), (0, 3), (0, 4), (4, 5), (3, 6)]
     positions = {0: (5, 5), 1: (4, 4.5), 2: (10, 4), 3: (5, 4),
                  4: (6.5, 4.3), 5: (6.5, 3.5), 6: (3.5, 3.5)}
-    labels = {0: ast_info["name"], 1: ast_info["assign"][0], 2: ast_info["return"][0].split()[1],
-              3: ast_info["if"][0][0][3:], 4: ast_info["for"][0][0], 5: ast_info["for"][0][1],
-              6: ast_info["if"][0][1]}
+
     edge_labels = {(0, 1): "assign", (0, 2): "return", (0, 3): "if",
-                   (0, 4): "for", (4, 5): "'for' body", (3, 6): "'if' body"}
+                   (0, 4): "for", (4, 5): "'for' body", (3, 6): "return"}
 
     G = nx.DiGraph(nodes)
 
-    nx.draw_networkx(G, positions, with_labels=False)
-    nx.draw_networkx_labels(G, positions, labels=labels)
+    nx.draw_networkx_edges(G, positions)
+
+    nx.draw_networkx_labels(G, positions, labels={0: ast_info["name"]}, bbox={'boxstyle': 'round', 'facecolor': 'blue',
+                                                                              'alpha': 0.7}, font_size=10)
+    nx.draw_networkx_labels(G, positions, labels={1: ast_info["assign"][0]},
+                            bbox={'boxstyle': 'round', 'facecolor': 'orange'},
+                            font_size=10)
+    nx.draw_networkx_labels(G, positions, labels={5: ast_info["for"][0][1]},
+                            bbox={'boxstyle': 'round', 'facecolor': 'blue',
+                                  'alpha': 0.5}, font_size=10)
+
+    nx.draw_networkx_labels(G, positions, labels={2: ast_info["return"][0].split()[1], 6: ast_info["if"][0][1]},
+                            bbox={'boxstyle': 'round', 'facecolor': 'green', 'alpha': 0.5}, font_size=10)
+    nx.draw_networkx_labels(G, positions, labels={3: ast_info["if"][0][0][3:]},
+                            bbox={'boxstyle': 'round', 'facecolor': 'red'},
+                            font_size=10)
+
+    nx.draw_networkx_labels(G, positions, labels={4: ast_info["for"][0][0]},
+                            bbox={'boxstyle': 'round', 'facecolor': 'red',
+                                  'alpha': 0.5}, font_size=10)
+
     nx.draw_networkx_edge_labels(G, positions, edge_labels=edge_labels)
 
-    # Set margins for the axes so that nodes aren't clipped
     ax = plt.gca()
     ax.margins(0.20)
     ax.axis("off")
+
     plt.savefig("artifacts/ast.pdf")
+
     plt.show()
 
 

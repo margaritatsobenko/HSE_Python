@@ -1,0 +1,10 @@
+README.md
+pyproject.toml
+setup.py
+src/ast_package/__init__.py
+src/ast_package/fib.py
+src/ast_package/my_ast.py
+src/ast_pkg_mtsobenko.egg-info/PKG-INFO
+src/ast_pkg_mtsobenko.egg-info/SOURCES.txt
+src/ast_pkg_mtsobenko.egg-info/dependency_links.txt
+src/ast_pkg_mtsobenko.egg-info/top_level.txt

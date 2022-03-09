@@ -1,0 +1,3 @@
+Time when using synchronization: 4.9537s
+Time when using processes: 1.9261s
+Time when using threads: 4.8493s
